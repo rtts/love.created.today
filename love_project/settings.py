@@ -1,17 +1,17 @@
 import os
 try:
-    from secret import SECRET_KEY
+    from .secret import SECRET_KEY
 except ImportError:
     raise ImproperlyConfigured("Error retrieving SECRET_KEY")
 try:
-    from debug import DEBUG
+    from .debug import DEBUG
 except ImportError:
     DEBUG = False
 
 BASE_DIR         = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ALLOWED_HOSTS    = ['localhost', 'love.created.today']
-ROOT_URLCONF     = 'love.urls'
-WSGI_APPLICATION = 'love.wsgi.application'
+ALLOWED_HOSTS    = ['localhost', 'love_project.created.today']
+ROOT_URLCONF     = 'love_project.urls'
+WSGI_APPLICATION = 'love_project.wsgi.application'
 LANGUAGE_CODE    = 'en-us'
 TIME_ZONE        = 'UTC'
 USE_I18N         = True
@@ -19,6 +19,7 @@ USE_L10N         = True
 USE_TZ           = True
 STATIC_URL       = '/static/'
 MEDIA_URL        = '/media/'
+AUTH_USER_MODEL  = 'love_engine.Bachelor'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'love_engine',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -87,6 +89,6 @@ LOGGING = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ('/tmp/love.sqlite3'),
+        'NAME': ('/tmp/love_project.sqlite3'),
     }
 }
