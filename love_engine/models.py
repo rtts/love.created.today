@@ -5,7 +5,8 @@ from django.utils.encoding import python_2_unicode_compatible
 from adminsortable.models import SortableMixin, SortableForeignKey
 
 class Bachelor(AbstractUser):
-    pass
+    class Meta:
+        verbose_name = 'bachelor'
 
 @python_2_unicode_compatible
 class Party(models.Model):
@@ -15,6 +16,12 @@ class Party(models.Model):
     guests = models.ManyToManyField(Bachelor, editable=False, related_name='parties_attending')
     def __str__(self):
         return 'Party of {} at {}'.format(self.organizer, self.where)
+
+    def nr_of_guests(self):
+        return self.guests.count()
+
+    class Meta:
+        verbose_name_plural = 'parties'
 
 @python_2_unicode_compatible
 class Game(SortableMixin):
